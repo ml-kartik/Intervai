@@ -30,6 +30,7 @@ function Home() {
       <Navbar />
 
       <div className='flex-1 px-6 py-20'>
+        <div className='max-w-6xl mx-auto'>
         <div className='flex justify-center mb-6'>
           <div className='bg-gray-100 text-gray-600 text-sm px-4 py-2 rounded-full flex items-center gap-2'>
             <HiSparkles size={16} className='bg-green-50 text-green-600' />
@@ -191,7 +192,11 @@ function Home() {
                             </div>
 
                             <div className='w-full md:w-1/2'>
-                            <div className='bg-green-50 text-green-600 w-12 '></div>
+                            <div className='bg-green-50 text-green-600 w-12 h-12 rounded-xl flex items-center justify-center mb-6 '>
+                              {item.icon}
+                            </div>
+                             <h3 className='font-semibold mb-3 text-xl'>{item.title}</h3>
+                             <p className='text-gray-500 text-sm leading-relaxed'>{item.desc}</p>
                             </div>
                         </div>
 
@@ -202,6 +207,79 @@ function Home() {
 
           </div>
 
+          <div className='mb-32'>
+            <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className='text-4xl font-semibold text-center mb-16'>
+              Multiple Interview{" "}
+              <span className='text-green-600'>Modes</span>
+            </motion.h2>
+
+            <div className='grid md:grid-cols-2 gap-10'>
+              {
+                [
+                  {
+                    img: hrImg,
+                    title: "HR Interview Mode",
+                    desc: "Behavioral and communication based evaluation."
+                    },
+                    {
+                    img: techImg,
+                    title: "Technical Mode",
+                    desc: "Deep technical questioning based on selected role."
+                    },
+
+                    {
+                      img: confidenceImg,
+                      title: "Confidence Detection",
+                      desc: "Basic tone and voice analysis insights.",
+                    },
+                      {
+                      img: creditImg,
+                      title: "Credits System",
+                      desc: "Unlock premium interview sessions easily."
+                    }
+
+
+
+
+                    ].map((mode,index)=>(
+                       <motion.div key={index} 
+                       initial={{ opacity: 0, y: 30 }}
+                       whileInView={{ opacity: 1, y: 0 }}
+                       transition={{ duration: 0.5, delay: index * 0.1 }}
+                       whileHover={{ y: -6 }}
+                       className='bg-white border border-gray-200 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all'>
+                        <div className='flex items-center justify-between gap-6'>
+                            <div className='w-1/2'>
+                            <h3 className='font-semibold text-xl mb-3'>
+                              {mode.title}
+                            </h3>
+
+                            <p className='text-gray-500 text-sm leading-relaxed'>
+                              {mode.desc}
+                            </p>
+                            </div>
+
+                            {/*RIGHT IMAGE*/}
+                            <div className='w-1/2 flex justify-end'>
+                            <img 
+                            src={mode.img}
+                            alt={mode.title}
+                            className = "w-28 h-28 object-contain"/>
+                            </div>
+                        </div>
+
+                       </motion.div>
+                    ))
+                    }
+            </div>
+
+          </div>
+        
+      </div>
       </div>
       {showAuth && <AuthModel onClose={() => setShowAuth(false)} />}
     </div>
